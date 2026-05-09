@@ -49,11 +49,11 @@ app.post('/api/add-song', upload.fields([{ name: 'audio', maxCount: 1 }, { name:
     let { youtubeUrl, thumbnail } = req.body;
     
     if (req.files['audio'] && req.files['audio'][0]) {
-      youtubeUrl = `http://localhost:${process.env.PORT || 5000}/uploads/${req.files['audio'][0].filename}`;
+      youtubeUrl = `https://meloflowapi.anfassck.online/uploads/${req.files['audio'][0].filename}`;
     }
     
     if (req.files['image'] && req.files['image'][0]) {
-      thumbnail = `http://localhost:${process.env.PORT || 5000}/uploads/${req.files['image'][0].filename}`;
+      thumbnail = `https://meloflowapi.anfassck.online/uploads/${req.files['image'][0].filename}`;
     }
 
     if (!title || (!youtubeUrl && !req.files['audio']) || (!thumbnail && !req.files['image'])) {
