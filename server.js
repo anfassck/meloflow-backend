@@ -36,8 +36,14 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Seed default Admin user and keep password updated with .env changes
 const seedAdmin = async () => {
   try {
-    const adminEmail = process.env.ADMIN_EMAIL || 'admin@gmail.com';
-    const adminPassword = process.env.ADMIN_PASSWORD || 'anfass@123';
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    
+    if (!adminEmail || !adminPassword) {
+      console.warn("WARNING: ADMIN_EMAIL or ADMIN_PASSWORD is not set in environment variables. Skipping admin seeding.");
+      return;
+    }
+    
     let adminUser = await User.findOne({ email: adminEmail.toLowerCase() });
     
     if (!adminUser) {
